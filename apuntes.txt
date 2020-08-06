@@ -84,3 +84,9 @@ module.exports = {
                 ]
         }
 }
+
+
+
+---- Zeit es ahora Vercel ----
+En la próxima clase verás que el profesor realiza el deploy con Now, entonces cada vez que el profesor mencione “now.json” 
+deberías reemplazarlo por “vercel.json”, de la misma manera, en la terminal se debería utilizar la palabra vercel.
