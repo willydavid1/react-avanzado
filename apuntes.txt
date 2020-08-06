@@ -50,3 +50,37 @@ module.exports = {
                 new HtmlWebpackPlugin()
         ]
 }
+
+
+
+---- Instalación de React y Babel ----
+En esta clase vamos a configurar React instalando las dependencias npm i react react-dom y Babel para poder transpilar código jsx a JavaScript Vanilla con: npm i @babel/core @babel/preset-env babel-loader @babel/preset-react --save-dev
+En el index.js importamos react-dom y react para renderizar JSX en el index.html (en el index.html colocamos un div que alli se va a realizar el render)
+        import React from 'react' 
+        import ReactDOM from 'react-dom'
+
+        ReactDOM.render(<h1>hola</h1>, document.getElementById('app'))
+
+Ahora añadiremos en nuestro webpack.config.js lo siguiente:
+// webpack.config.js
+{/*...*/}
+module.exports = {
+        {/*...*/}
+        module: {
+                rules: [
+                        {
+                                test: /\.js$/,
+                                exclude: /node_modules/,
+                                use: {
+                                        loader: 'babel-loader',
+                                        options: {
+                                                presets: [
+                                                        '@babel/preset-env',
+                                                        '@babel/preset-react'
+                                                ]
+                                        }
+                                }
+                        }
+                ]
+        }
+}
