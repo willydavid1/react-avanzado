@@ -1,0 +1,52 @@
+Proyecto y tecnologías que usaremos
+En este curso realizaremos una aplicación muy parecida a Instagram, llamada petgram. Tendremos nuestras rutas, gestión de usuarios y likes.
+
+Utilizaremos como empaquetador y transpilador:
+
+Webpack
+Babel
+Estilado con CSS en JS con:
+
+styled-components
+Como linter utilizaremos:
+
+Standard JS
+Para fetching (obtención) de datos:
+
+GraphQL
+React Apollo
+Para el enrutado de la SPA utilizaremos:
+
+Reach Router
+Para las buenas prácticas utilizaremos:
+
+Lighthouse
+Cypress
+Por último haremos SEO, PWA y Deploy con:
+
+React Helmet
+Workbox
+Progressive Web App
+Deply con Now (ahora zeit)
+
+
+---- Pasos para iniciar nuestro proyecto ----
+
+Paso 1: Vamos a clonar el repositorio desde github.com/midudev/curso-platzi-react-avanzado usando git clone URL_DEL_REPO en nuestra consola.
+Paso 2: Vamos a instalar webpack y webpack-cli como dependencias de desarrollo con: npm i webpack webpack-cli --save-dev
+Paso 3: Crearemos una carpeta llama src y dentro de ella un archivo index.js en el cual colocaremos solo un console.log('Empezamos el curso!').
+Paso 4: Crearemos en el root de nuestro proyecto un archivo webpack.config.js el cual tendrá toda la configuración de webpack
+Paso 5: Instalaremos html-webpack-plugin con: npm i html-webpack-plugin --save-dev
+Paso 6: Instalaremos webpack-dev-server con: npm i webpack-dev-server --save-dev
+Paso 7: Añadiremos dos nuevos scripts llamados | "dev": "webpack-dev-server", "build": "webpack"
+// webpack.config.js
+const HtmlWebpackPlugin = require("html-webpack-plugin")
+
+module.exports = {
+        output: {
+                filename: 'app.bundle.js'
+        },
+        plugins: [
+                new HtmlWebpackPlugin()
+        ]
+}
