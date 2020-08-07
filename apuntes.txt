@@ -96,7 +96,7 @@ deberías reemplazarlo por “vercel.json”, de la misma manera, en la terminal
 ---- Linter, extensiones y deploy con Now ----
 En esta clase haremos que el desarrollo sea más ágil y correcto siguiendo los siguientes pasos:
 
-  - Vamos a instalar StandardJS como dependencia de desarrollo con: npm i standard --save-dev StandardJS nos va a servir de Linter para una mejor escritura de JavaScript/React.
+  - Vamos a instalar StandardJS y eslint como dependencia de desarrollo con: npm i standard eslint --save-dev StandardJS nos va a servir de Linter para una mejor escritura de JavaScript/React.
   - Agregaremos un nuevo script en nuestro package.json: ""lint"": ""standard"".
   - Ahora vamos a ignorar aquellos archivos que no queremos que el Linter arregle, añadiremos en nuestro package.json lo siguiente:
         "standard": {
@@ -124,6 +124,8 @@ En esta clase haremos que el desarrollo sea más ágil y correcto siguiendo los 
                 "eslint.format.enable": true,
                 "prettier.eslintIntegration": true
 
+Tambien otra manera es intalando npm i eslint -D y luego correr npx eslint --init | nos va a hacer un monton de preguntas nos instalara unas dependencias y nos genera el .eslintrc.js
+Ya luego podemos abrir las settings y buscamos eslint y podemos configurar todo como el --fix al guardar | tenemos que tener instalada la extension eslint para ver los errores de linteo
 
 - Ahora utilizaremos Now (ahora vercel) para hacer el deploy de nuestro proyecto.
 - Descargaremos e instalaremos Now para que nos registre de una manera mucho más fácil los tokens de acceso y podamos continuar con el curso. (sudo npm i -g vercel)
@@ -172,3 +174,30 @@ conclusion: intalamos sudo npm i -g vercel , nos logueamos vercel login, y añad
  - Antes todo era HTML-centric todo estaba en el html, estilos en css y js para funcionalidad
  - Despues pasamos a JS-centric que es lo que conocemos como JSX HTML dentro de JS y los estilos css aparte
  - CSS-in-JS como su nombre lo indica son estilos dentro del JS, los estilos son locales para cada componente y no hay colision de estilos usaremos Styled-components
+
+npm i styled-components
+Para soportar los CSS en JS instalar esta extension vscode-styled-components
+
+
+---- Componente: Category ----
+No usaremos export default exportaremos los componentes de manera nombrada export COMPONENTE
+
+creamos un archivo llamado styles.js y dentro generamos los componentes estilados con styled-components
+import styled from 'styled-components';
+
+export const Anchor = styled.a`
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    text-decoration: none;
+    width: 75px;
+`
+ 
+Ya luego los importamos y los renderizamos 
+import { Anchor } from './styles'
+export const Category = ({ cover = DEFAULT_IMAGE, path, emoji = '?' }) => (
+    <Anchor href={ path }>
+        <Image src={ cover } />
+        { emoji }
+    </Anchor>
+)
