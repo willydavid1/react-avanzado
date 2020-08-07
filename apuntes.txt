@@ -166,3 +166,9 @@ URL front: https://petgram-avanzado-react.vercel.app
 - Finalmente en la raíz de nuestro proyecto ejecutaremos now para que nos dé una URL en la que se verá nuestro proyecto."
 
 conclusion: intalamos sudo npm i -g vercel , nos logueamos vercel login, y añadimos los vercel.json al api y al front para subir el back
+
+
+---- CSS-in-JS ----
+ - Antes todo era HTML-centric todo estaba en el html, estilos en css y js para funcionalidad
+ - Despues pasamos a JS-centric que es lo que conocemos como JSX HTML dentro de JS y los estilos css aparte
+ - CSS-in-JS como su nombre lo indica son estilos dentro del JS, los estilos son locales para cada componente y no hay colision de estilos usaremos Styled-components
