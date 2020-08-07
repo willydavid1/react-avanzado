@@ -201,3 +201,20 @@ export const Category = ({ cover = DEFAULT_IMAGE, path, emoji = '?' }) => (
         { emoji }
     </Anchor>
 )
+
+
+---- Creando ListOfCategories y estilos globales ----
+Para estilos globales con styled-components tenemos que importar createGlobalStyle y luego renderizar el componente en el App.js
+
+import { createGlobalStyle } from 'styled-components'
+export const GlobalStyle = createGlobalStyle`
+ { estilos globales }
+`
+//App.js
+import { GlobalStyle } from './GlobalStyles'
+export const App = () => (
+  <>
+    <GlobalStyle />
+    <ListOfCategories />
+  </>
+)
