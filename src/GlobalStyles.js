@@ -16,6 +16,7 @@ export const GlobalStyle = createGlobalStyle`
 
   ul {
     list-style: none;
+    padding: 0 10px;
   }
 
   button {
@@ -25,7 +26,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background: #fefefe;
+    background: #9966FF;
     height: 100vh;
     margin: 0 auto;
     max-width: 500px;
@@ -35,8 +36,10 @@ export const GlobalStyle = createGlobalStyle`
 
   #app {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
     min-height: 100vh;
     padding-bottom: 10px;
+    background: #fefefe;
+    border-radius: 20px;
   }
 `

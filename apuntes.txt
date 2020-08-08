@@ -218,3 +218,10 @@ export const App = () => (
     <ListOfCategories />
   </>
 )
+
+
+
+
+---- SVGR: de SVG a componente de ReactJS ----
+En esta clase usaremos maketext.io para crear nuestro logo y descargarlo en SVG. Posteriormente a esto utilizaremos SVGOMG para optimizar nuestro logo y tener una mejor versión para usarla en nuestro proyecto.
+Luego para convertir nuestro logo svg en un componente utilizaremos SVGR.
