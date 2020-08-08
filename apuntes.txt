@@ -249,3 +249,51 @@ export const fadeIn = ({ time = '1s', type = 'ease' } = {}) => (
 )
 // llamada dentro de una clase
   ${fadeIn({ time: '1s' })}
+
+
+---- Intersection Observer ----
+hacemos que cada componente de PhotoCard se renderize acorde entre al viewport
+
+
+---- Uso de polyfill de Intersection Observer e imports dinámicos ----
+En esta clase añadiremos soporte a navegadores viejos con un polyfill de Intersection Observer.
+
+npm i intersection-observer
+npm i @babel/plugin-syntax-dynamic-import -D // ya se soporta actualmente pero igual lo configuramos
+npm i babel-eslint -D
+
+En el webpack.config.js añadimos la siguiente linea
+use: {
+      loader: 'babel-loader',
+      options: {
+        plugins: ['@babel/plugin-syntax-dynamic-import'], // esta para imports dinamicos
+        presets: ['@babel/preset-env', '@babel/preset-react']
+      }
+    }
+
+Componente evaluamos si soporta el IntersectionObserver o utilizamos el polyfill :
+useEffect(() => {
+    Promise.resolve(
+      typeof window.IntersectionObserver !== 'undefined'
+        ? window.IntersectionObserver
+        : import('intersection-observer') // import dinamico
+    ).then(() => {
+      const observer = new window.IntersectionObserver((entries) => {
+        const { isIntersecting } = entries[0]
+
+        if (isIntersecting) {
+          setShow(true)
+          observer.disconnect()
+        }
+      })
+      observer.observe(ref.current)
+    })
+  }, [ref])
+
+parser de eslint:
+"eslintConfig": {
+    "parser": "babel-eslint",
+    "extends": [
+      "./node_modules/standard/eslintrc.json"
+    ]
+  }
