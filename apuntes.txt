@@ -225,3 +225,27 @@ export const App = () => (
 ---- SVGR: de SVG a componente de ReactJS ----
 En esta clase usaremos maketext.io para crear nuestro logo y descargarlo en SVG. Posteriormente a esto utilizaremos SVGOMG para optimizar nuestro logo y tener una mejor versión para usarla en nuestro proyecto.
 Luego para convertir nuestro logo svg en un componente utilizaremos SVGR.
+
+
+
+---- Creando animaciones con keyframes ----
+creamos una animacion con keyframes de styled-components y ya luego se llama a la funcion fadeIn 
+import { keyframes, css } from 'styled-components'
+const fadeInKeyframes = keyframes`
+  from {
+    filter: blur(5px);
+    opacity: 0;
+  }
+
+  to {
+    filter: blur(0);
+    opacity: 1;
+  }
+`
+export const fadeIn = ({ time = '1s', type = 'ease' } = {}) => (
+  css`
+    animation: ${time} ${fadeInKeyframes} ${type};
+  `
+)
+// llamada dentro de una clase
+  ${fadeIn({ time: '1s' })}
