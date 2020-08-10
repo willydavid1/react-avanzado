@@ -297,3 +297,9 @@ parser de eslint:
       "./node_modules/standard/eslintrc.json"
     ]
   }
+
+
+
+
+---- Usando el localStorage para guardar los likes ----
+Guardamos y leemos el localStorage para la info de los likes
