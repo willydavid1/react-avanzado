@@ -303,3 +303,34 @@ parser de eslint:
 
 ---- Usando el localStorage para guardar los likes ----
 Guardamos y leemos el localStorage para la info de los likes
+
+
+
+---- Custom Hooks: useNearScreen y useLocalStorage ----
+
+Reutilizamos la logica de guardar y leer el LocalStorage en el (useLocalStorage) y el (useNearScreen) para el observer de las imagenes
+Los Custom Hooks se encuentran disponibles en la carpeta hooks (al nivel de la raiz de src)
+
+Asi se ve el (useLocalStorage - CUSTOM HOOK):
+import { useState } from 'react'
+export function useLocalStorage (key, initialValue) {
+  const [storedValue, setValue] = useState(() => {
+    try {
+      const item = window.localStorage.getItem(key)
+      return item !== null ? JSON.parse(item) : initialValue
+    } catch (error) {
+      return initialValue
+    }
+  })
+
+  const setLocalStorage = (value) => {
+    try {
+      window.localStorage.setItem(key, JSON.stringify(value))
+      setValue(value)
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  return [storedValue, setLocalStorage]
+}
