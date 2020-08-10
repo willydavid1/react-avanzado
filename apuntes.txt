@@ -334,3 +334,59 @@ export function useLocalStorage (key, initialValue) {
 
   return [storedValue, setLocalStorage]
 }
+
+
+
+---- ¿Qué es GraphQL y React Apollo? Inicializando React Apollo Client y primer HoC ----
+GraphQL es un lenguaje (lenguaje de consulta) creado por Facebook para obtener solo los datos que necesitamos en nuestra aplicación. Imaginemos que tenemos una REST API con WordPress, él nos entrega un JSON con mucha data innecesaria y solo queremos unos cuantos fields; GraphQL hace posible obtener únicamente esa data.
+Ventajas: Describe la Data (que tipo de datos tenemos), optimiza recursos de red (solo traemos lo que necesitamos), resultados predecibles
+
+React Apollo es un cliente que nos va a permitir conectarnos a un servidor GraphQL.
+
+Vamos a instalar npm i apollo-boost, una utilidad que nos permite inicializar nuestra conexión con un servidor de Apollo muy rápidamente y sin configuración, necesitaremos npm i react-apollo el cual es la integración de Apollo con React y finalmente npm i graphql.
+
+Configuraremos nuestro index.js (punto de entrada) para inicializar nuestro cliente de Apollo con GraphQL de la siguiente manera:
+// index.js
+{/*...*/}
+import ApolloClient from 'apollo-boost'
+import { ApolloProvider } from 'react-apollo'
+{/*...*/}
+const client = new ApolloClient({
+        uri: 'https://petgram-server-willydavid.vercel.app/graphql'
+})
+ReactDOM.render(
+        <ApolloProvider client={client}>
+                <App />
+        ApolloProvider>,
+        document.getElementById('app')
+)
+
+
+// la primera query en ListOfPhotoCards
+{/*...*/}
+import { graphql } from 'react-apollo'
+import { gql } from 'apollo-boost'
+
+const withPhotos = graphql(gql`
+  query getPhotos {
+    photos {
+      id,
+      categoryId,
+      src,
+      likes,
+      userId,
+      liked
+    }
+  }
+`)
+
+const ListOfPhotoCardsComponent = ({ data: { photos = [] } } = {}) => {
+  return (
+    <ul>
+      {photos.map((photo) => <PhotoCard key={photo.id} {...photo} />)}
+    </ul>
+  )
+}
+
+// HoC para el componente ListOfPhotoCardsComponent con la query de withPhotos
+export const ListOfPhotoCards = withPhotos(ListOfPhotoCardsComponent)
