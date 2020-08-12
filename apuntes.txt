@@ -390,3 +390,26 @@ const ListOfPhotoCardsComponent = ({ data: { photos = [] } } = {}) => {
 
 // HoC para el componente ListOfPhotoCardsComponent con la query de withPhotos
 export const ListOfPhotoCards = withPhotos(ListOfPhotoCardsComponent)
+
+
+
+---- Parametros para un query con GraphQL ----
+Asi se ve la query con parametros:
+export const withPhotos = graphql(gql`
+  query getPhotos($categoryId: ID) {
+    photos(categoryId: $categoryId) {
+      id,
+      categoryId,
+      src,
+      likes,
+      userId,
+      liked
+    }
+  }
+`)
+y se le pasan por props <ListOfPhotoCards categoryId={2} />
+
+Concepto de container: (es el que se encarga de hacer el feching de dato de nuestros componentes)
+ - Creamos dentro del src una carpeta llamada container y dentro un ListOfPhotoCards.js que importa el HoC y exporta el componente ListOfPhotoCards 
+ - Ya luego en el App.js cambiamos el import | import { ListOfPhotoCards } from './container/ListOfPhotoCards'
+ - Nos permite separar conceptos de componentes, fetching de datos (hoc) y los containers 
