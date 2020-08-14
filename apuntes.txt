@@ -413,3 +413,11 @@ Concepto de container: (es el que se encarga de hacer el feching de dato de nues
  - Creamos dentro del src una carpeta llamada container y dentro un ListOfPhotoCards.js que importa el HoC y exporta el componente ListOfPhotoCards 
  - Ya luego en el App.js cambiamos el import | import { ListOfPhotoCards } from './container/ListOfPhotoCards'
  - Nos permite separar conceptos de componentes, fetching de datos (hoc) y los containers 
+
+
+
+---- Usando las mutaciones con los likes ----
+
+El componente de mutation es otro componente importante en una aplicación Apollo. 
+Es un componente React que proporciona una función para ejecutar una mutation de GraphQL para así alterar la data.
+Además, rastrea el estado de carga, finalización y error de esa mutación.
