@@ -421,3 +421,27 @@ Concepto de container: (es el que se encarga de hacer el feching de dato de nues
 El componente de mutation es otro componente importante en una aplicación Apollo. 
 Es un componente React que proporciona una función para ejecutar una mutation de GraphQL para así alterar la data.
 Además, rastrea el estado de carga, finalización y error de esa mutación.
+
+
+
+---- ¿Qué es Reach Router? Creando la ruta Home ----
+Reach Router es una versión simplificada y mejor optimizada de React Router, su creador es Ryan Florence el mismo creador de React Router. Se anunció que los dos paquetes se iban a unir, pero su API se va a parecer más a Reach Router.
+
+En este módulo te vamos a enseñar como usar este increíble paquete para manejar las rutas en nuestra aplicación.
+npm i @reach/router
+
+// App.js
+import { Router } from '@reach/router'
+<Router>
+    <Home path='/' />
+    <Home path='/pet/:id' />
+</Router>
+
+// package.json - scripts
+    "dev": "webpack-dev-server --open --history-api-fallback",
+
+// webpack-config.js
+output: {
+    filename: 'app.bundle.js',
+    publicPath: '/'
+},
