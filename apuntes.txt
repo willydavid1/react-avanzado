@@ -445,3 +445,47 @@ output: {
     filename: 'app.bundle.js',
     publicPath: '/'
 },
+
+
+---- Rutas protegidas ----
+Con el método render props realizaremos rutas de autenticación para saber si el usuario ha iniciado sesión o no y podremos mostrar contenido dependiendo de las props que le estemos pasando.
+
+Utilizamos las render props para determinar si un usuario esta autenticado
+
+// App.js
+{/*...*/}
+const UserLogged = ({ children }) => {
+  return children({ isAuth: false })
+}
+{/*...*/}
+export const App = () => {
+  return (
+    <>
+      <GlobalStyle />
+      <Logo />
+      <Router>
+        <Home path='/' />
+        <Home path='/pet/:categoryId' />
+        <Detail path='/detail/:detailId' />
+      </Router>
+
+      {/* Rutas protegidas */}
+      <UserLogged>
+        {
+          ({ isAuth }) => (
+            isAuth
+              ? (<Router>
+                <Favs path='/favs' />
+                <User path='/user' />
+              </Router>)
+              : (<Router>
+                <NotRegisteredUser path='/favs' />
+                <NotRegisteredUser path='/user' />
+              </Router>)
+          )
+        }
+      </UserLogged>
+      <NavBar />
+    </>
+  )
+}
