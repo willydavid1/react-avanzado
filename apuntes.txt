@@ -489,3 +489,90 @@ export const App = () => {
     </>
   )
 }
+
+
+
+---- Introducción a React.Context ----
+Context API es una característica que tiene React para poder pasar datos en nuestra aplicación sin necesidad de usar las Props.
+
+Para crear un contexto vamos a importar el método createContext de la librería React. El contexto que creemos no va a dejar de ser un componente de React, por ello debe llevar mayúscula al inicio.
+
+El Context que creemos nos va a proporcionar 2 componentes:
+
+Provider: componente que debe envolver a nuestra aplicación.
+Consumer: nos va a permitir acceder a las render props que declaremos en el Provider. (recibe una render prop como children)
+
+
+//Context.js
+import React, { createContext, useState } from 'react'
+const Context = createContext()
+
+const Provider = ({ children }) => {
+  const [isAuth, setIsAuth] = useState(false)
+  const value = {
+    isAuth,
+    activateAuth: () => {
+      setIsAuth(true)
+    }
+  }
+
+  return (
+    <Context.Provider value={value}>
+      {children}
+    </Context.Provider>
+  )
+}
+
+export default {
+  Provider,
+  Consumer: Context.Consumer
+}
+
+//index.js punto de entrada de la App
+{/*...*/}
+import Context from './Context'
+{/*...*/}
+ReactDOM.render(
+  <Context.Provider>
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
+  </Context.Provider>,
+  document.getElementById('app')
+)
+
+// App.js
+{/*...*/}
+import Context from './Context'
+{/*...*/}
+<Context.Consumer>
+    {
+        ({ isAuth }) => (
+        isAuth
+            ? (<Router>
+            <Favs path='/favs' />
+            <User path='/user' />
+            </Router>)
+            : (<Router>
+            <NotRegisteredUser path='/favs' />
+            <NotRegisteredUser path='/user' />
+            </Router>)
+        )
+    }
+</Context.Consumer>
+
+// Not NotRegisteredUser.js
+import Context from '../Context'
+export const NotRegisteredUser = () => (
+  <Context.Consumer>
+    {
+      ({ activateAuth }) => {
+        return (
+          <form onSubmit={activateAuth}>
+            <button> Iniciar sesión </button>
+          </form>
+        )
+      }
+    }
+  </Context.Consumer>
+)
