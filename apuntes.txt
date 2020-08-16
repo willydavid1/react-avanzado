@@ -576,3 +576,59 @@ export const NotRegisteredUser = () => (
     }
   </Context.Consumer>
 )
+
+
+
+---- Mutaciones para registro ----
+De momento nuestro formulario no está guardando la información de registro en ningún lado, para ello vamos a usar un Mutation de GraphQL para mandarle la información a nuestro backend y que nos regrese un JSON Web Token.
+
+Para configurar esta Mutation vamos a crear un container llamado RegisterMutation.js con el siguiente código:
+// RegisterMutation.js
+import React from ‘react’
+import { Mutation } from ‘react-apollo’
+import { gql } from ‘apollo-boost’
+
+const REGISTER = gql`
+	mutation signup ($input: UserCredentials!) {
+		signup (input: $input)
+	}
+`
+
+export const RegisterMutation = ({ children }) => {
+	return (
+		<Mutation mutation={REGISTER}>
+			{children}
+		Mutation>
+	)
+}
+
+
+// NotRegisteredUser.js
+import { RegisterMutation } from '../container/RegisterMutation'
+export const NotRegisteredUser = () => (
+  <Context.Consumer>
+    {
+      ({ activateAuth }) => {
+        return (
+          <>
+            <RegisterMutation>
+              {
+                (register) => {
+                  const onSubmit = ({ email, password }) => {
+                    const input = { email, password }
+                    const variables = { input }
+                    register({ variables }).then(activateAuth)
+                  }
+                  return <UserForm title='Registrarse' onSubmit={onSubmit} />
+                }
+              }
+            </RegisterMutation>
+            <UserForm title='Iniciar sesión' onSubmit={activateAuth} />
+          </>
+        )
+      }
+    }
+  </Context.Consumer>
+)
+
+El UserForm es el componente del formulario que tiene el evento onSubmit que se llama cuando se envia el formulario
