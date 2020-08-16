@@ -11,6 +11,9 @@ export const Input = styled.input`
   padding: 8px 4px;
   display: block;
   width: 100%;
+  &[disabled] {
+    opacity: .8;
+  }
 `
 
 export const Button = styled.button`
@@ -31,6 +34,10 @@ export const Button = styled.button`
     color: #8d00ff;
     width: 50%;
   }
+
+  &[disabled] {
+    opacity: .3;
+  }
 `
 
 export const Title = styled.h2`
@@ -41,4 +48,9 @@ export const Title = styled.h2`
 
 export const DivContainer = styled.div`
   padding: 0 15px;
+`
+
+export const Error = styled.span`
+  font-size: 14px;
+  color: red;
 `
