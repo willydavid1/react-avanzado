@@ -765,3 +765,22 @@ export const ListOfFavs = ({ favs = [] }) => {
     </Grid>
   )
 }
+
+
+---- Ultimos retoques a nuestra app ----
+Asi quedaron nuestras rutas protegidas y la de 404
+<Router>
+    <NotFound default />
+
+    <Home path='/' />
+    <Home path='/pet/:categoryId' />
+    <Detail path='/detail/:detailId' />
+    {!isAuth && <NotRegisteredUser path='/login' />}
+    {!isAuth && <Redirect from='/favs' to='/login' />}
+    {!isAuth && <Redirect from='/user' to='/login' />}
+    {isAuth && <Redirect from='/login' to='/' />}
+
+    {/* Rutas protegidas */}
+    <Favs path='/favs' />
+    <User path='/user' />
+</Router>
