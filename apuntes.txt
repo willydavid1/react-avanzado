@@ -632,3 +632,25 @@ export const NotRegisteredUser = () => (
 )
 
 El UserForm es el componente del formulario que tiene el evento onSubmit que se llama cuando se envia el formulario
+
+
+---- Mutaciones para login ----
+Creamos dentro de container el LoginMutation.js con la mutacion para hacer login y luego en el NotRegisteredUser.js utilizando las render props verificamos si se logueo el usuario
+
+// LoginMutation.js
+import React from 'react'
+import { Mutation } from 'react-apollo'
+import { gql } from 'apollo-boost'
+
+const LOGIN = gql`
+mutation login ($input: UserCredentials!) {
+  login (input: $input)
+}
+`
+export const LoginMutation = ({ children }) => {
+  return (
+    <Mutation mutation={LOGIN}>
+      {children}
+    </Mutation>
+  )
+}
