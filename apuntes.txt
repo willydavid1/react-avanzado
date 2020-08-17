@@ -784,3 +784,9 @@ Asi quedaron nuestras rutas protegidas y la de 404
     <Favs path='/favs' />
     <User path='/user' />
 </Router>
+
+
+
+---- React Helmet ----
+Las SPA no necesariamente tienen mal SEO como se hace pensar. React Helmet nos va a ayudar a manejar el SEO de nuestra aplicación para poder cambiar el texto del title y de los meta dinamicamente
+npm i react-helmet
