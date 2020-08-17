@@ -654,3 +654,24 @@ export const LoginMutation = ({ children }) => {
     </Mutation>
   )
 }
+
+
+
+---- Persistiendo datos en Session Storage ----
+De momento nuestra sesión se pierde cada que refrescamos nuestra aplicación, vamos a persistir la sesión utilizando window.sessionStorage dentro de nuestro método activateAuth, quedando:
+
+// Context.js | dentro de value
+activateAuth: token => {
+	setIsAuth(true)
+	window.sessionStorage.setItem('token', token)
+}
+
+// NotRegisteredUser.js
+Cambiamos la manera en la que leemos el Context y hacemos uso del hook useContext(Context) 
+const value = useContext(Context) devuelve el valor de contexto actual. 
+
+    import React, { useContext } from 'react'
+    const { activateAuth } = useContext(Context)
+
+// Context.js | exportamos el contexto
+export const Context = createContext()
