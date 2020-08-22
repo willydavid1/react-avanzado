@@ -4,6 +4,20 @@ import ApolloClient from 'apollo-boost'
 import { ApolloProvider } from 'react-apollo'
 import Context from './Context'
 import { App } from './App'
+import { Provider as AlertProvider } from 'react-alert'
+import AlertTemplate from 'react-alert-template-basic'
+
+// optional cofiguration
+const options = {
+  offset: '10px',
+  position: 'top center',
+  timeout: 2000,
+  type: 'info',
+  transition: 'fade',
+  containerStyle: {
+    zIndex: 100
+  }
+}
 
 const client = new ApolloClient({
   uri: 'https://petgram-server-willydavid.vercel.app/graphql',
@@ -28,9 +42,11 @@ const client = new ApolloClient({
 console.log(Context)
 ReactDOM.render(
   <Context.Provider>
-    <ApolloProvider client={client}>
-      <App />
-    </ApolloProvider>
+    <AlertProvider template={AlertTemplate} {...options}>
+      <ApolloProvider client={client}>
+        <App />
+      </ApolloProvider>
+    </AlertProvider>
   </Context.Provider>,
   document.getElementById('app')
 )
