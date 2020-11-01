@@ -893,3 +893,48 @@ plugins: [
       ]
     })
   ],
+
+
+---- PWA: soporte offline ----
+Utilizaremos workbox-webpack-plugin para agregar soporte online a nuestro proyecto, así como lo hacen Twitter e Instagram cuando entramos desde el navegador.
+
+npm i workbox-webpack-plugin -D
+
+Config:
+plugins: [
+    {/*...*/}
+    new WorkboxWebpackPlugin.GenerateSW({
+      runtimeCaching: [
+        {
+          urlPattern: new RegExp('https://(res.cloudinary.com|images.unsplash.com)'),
+          handler: 'CacheFirst',
+          options: {
+            cacheName: 'images'
+          }
+        },
+        {
+          urlPattern: new RegExp('https://petgram-server-willydavid.vercel.app'),
+          handler: 'NetworkFirst',
+          options: {
+            cacheName: 'api'
+          }
+        }
+      ]
+    })
+  ],
+
+
+Instalamos el SW en index.html
+<script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+            navigator.serviceWorker.register('/service-worker.js')
+                .then((registration) => {
+                    console.log('SW registrado')
+                })
+                .catch((error) => {
+                    console.log('SW error', error)
+                })
+        })
+    }
+</script>
