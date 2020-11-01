@@ -938,3 +938,22 @@ Instalamos el SW en index.html
         })
     }
 </script>
+
+
+---- Testing con Cypress ----
+Vamos a usar cypress para hacer testing de nuestra aplicación. Hacer testing es imprescindible en nuestras aplicaciones para corroborar que todo está funcionando y mandar los datos a producción.
+
+npm i cypress -D
+
+añadimos script:
+"test": "cypress open"
+
+Configuramos el cypress.json se crea solo el archivo en la raiz del proyecto
+{
+    "baseUrl": "https://petgram-avanzado-react.vercel.app/",
+    "chromeWebSecurity": false,
+    "viewportWidth": 500,
+    "viewportHeight": 500
+}
+
+Test en la carpeta cypress/integration/petgram/test_spec.js
