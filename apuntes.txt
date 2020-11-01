@@ -807,3 +807,15 @@ Ejemplo:
 export const Home = React.memo(HomePage, (prevProps, props) => {
   return prevProps.categoryId === props.categoryId // si es igual la categoria memoiza el componente
 })
+
+
+---- React.lazy() y componente Suspense ----
+Suspense es un componente de React que nos va a permitir suspender algo cuando está en modo lazy(); y lazy(). El cual nos va a permitir importar un componente que no será cargado hasta que este sea llamado. De esta forma mejoraremos el tiempo de carga de nuestra aplicación enormemente.
+
+Paso 1: implementar el lazy para que se importe solo ese componente cuando se va a renderizar
+const Favs = React.lazy(() => import('./pages/Favs'))
+
+Paso 2: Exportar el componente como export default
+
+Paso 3: Importar suspense de React y envolver a toda la app pasandole un fallback que acepta cualquier componente de react y este aparecerá hasta que el componente en suspenso sea cargado.
+Suspense fallback={<div />}
