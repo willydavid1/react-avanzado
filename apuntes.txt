@@ -819,3 +819,51 @@ Paso 2: Exportar el componente como export default
 
 Paso 3: Importar suspense de React y envolver a toda la app pasandole un fallback que acepta cualquier componente de react y este aparecerá hasta que el componente en suspenso sea cargado.
 Suspense fallback={<div />}
+
+
+---- Usando PropTypes para validar las props ----
+Las PropTypes serán un validador del tipo de datos que estamos recibiendo como props en nuestros componentes, el cual nos permitirá a que sea exclusivamente ese tipo de datos.
+
+Paso 1: instalar la dependencia PropTypes
+npm i prop-types
+
+Paso 2: definir las props los typos y si son requeridas
+const FavButton = <Component />
+FavButton.propTypes = {
+  liked: PropTypes.bool.isRequired,
+  likes: PropTypes.number.isRequired,
+  onClick: PropTypes.func.isRequired
+}
+
+// array de objetos
+ListOfFavs.propTypes = {
+  favs: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      src: PropTypes.string.isRequired
+    })
+  )
+}
+
+
+SubmitButton.propTypes = {
+  disabled: PropTypes.bool,
+  onClick: PropTypes.func,
+  children: PropTypes.node.isRequired // cualquier cosa que react puede renderizar
+}
+
+// Validaciones personalizadas
+PhotoCard.propTypes = {
+  id: PropTypes.string.isRequired,
+  liked: PropTypes.bool.isRequired,
+  src: PropTypes.string.isRequired,
+  likes: function (props, propName, componentName) {
+    const propValue = props[propName]
+    if (propValue === undefined) {
+      return new Error(`${propName} Value must be defined`)
+    }
+    if (propValue < 0) {
+      return new Error(`${propName} Value must be greater than 0`)
+    }
+  }
+}
