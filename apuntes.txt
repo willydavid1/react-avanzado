@@ -867,3 +867,29 @@ PhotoCard.propTypes = {
     }
   }
 }
+
+
+---- PWA: generando el manifest ----
+Usaremos webpack-pwa-manifest para crear nuestro manifest.json y que nuestra aplicación pueda ser compatible con todos los requerimientos de una PWA.
+
+npm i webpack-pwa-manifest -D
+
+En las dev tools podemos medir los pasos para que sea una PWA
+Config:
+
+plugins: [
+    {/*...*/}
+    new WebpackPwaManifestPlugin({
+      name: 'Petgram - Tu app de fotos de mascotas',
+      short_name: 'Petgram',
+      description: 'Con petgram puedes encontrar fotos de animales muy facil',
+      background_color: '#fff',
+      theme_color: '#b1a',
+      icons: [
+        {
+          src: path.resolve('src/assets/icon.png'),
+          sizes: [96, 128, 192, 256, 384, 512]
+        }
+      ]
+    })
+  ],
