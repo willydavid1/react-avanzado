@@ -790,3 +790,20 @@ Asi quedaron nuestras rutas protegidas y la de 404
 ---- React Helmet ----
 Las SPA no necesariamente tienen mal SEO como se hace pensar. React Helmet nos va a ayudar a manejar el SEO de nuestra aplicación para poder cambiar el texto del title y de los meta dinamicamente
 npm i react-helmet
+
+
+---- Midiendo el performance de nuestra app y usando React.memo() ----
+¡Los componentes solo harán render si sus props han cambiado! Normalmente, todos los componentes de React en nuestro árbol pasarán por un render cuando se realicen cambios. Con PureComponent y React.memo(), podemos tener solo algunos componentes renderizados.
+
+npx webpack --mode "development"
+npx serve dist -s
+podemos ver el performance de nuestra app y la de los componentes con las dev tools de react en profiler
+
+Para evitar renderizados innecesarios si las props que recibe no son diferentes no vuelve a renderizar
+Ejemplo:
+// mi-archivo.js
+{/*...*/}
+
+export const Home = React.memo(HomePage, (prevProps, props) => {
+  return prevProps.categoryId === props.categoryId // si es igual la categoria memoiza el componente
+})
